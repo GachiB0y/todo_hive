@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_hive/widget/grop_form/grop_form_widget_model.dart';
+import 'package:todo_hive/ui/widget/grop_form/grop_form_widget_model.dart';
 
 class GroupFromWidget extends StatefulWidget {
   const GroupFromWidget({Key? key}) : super(key: key);
@@ -13,9 +13,7 @@ class _GroupFromWidgetState extends State<GroupFromWidget> {
   @override
   Widget build(BuildContext context) {
     return GroupFormWidgetModelProvider(
-      model:_model,
-        child: const _GroupFormWidgetBody()
-    );
+        model: _model, child: const _GroupFormWidgetBody());
   }
 }
 
@@ -27,39 +25,41 @@ class _GroupFormWidgetBody extends StatelessWidget {
     final model = GroupFormWidgetModelProvider.read(context)?.model;
 
     return Scaffold(
-      appBar: AppBar(title:const Text('Новая группа'),),
-      body: Center(child:
-      Container(
-        child:const Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 20),
-          child:  _GroupNameWidget(),
-        ),
+      appBar: AppBar(
+        title: const Text('Новая группа'),
       ),
+      body: Center(
+        child: Container(
+          child: const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: _GroupNameWidget(),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => model?.saveGroup(context),
-        child: Icon(Icons.done),
+        child: const Icon(Icons.done),
       ),
     );
   }
 }
-
 
 class _GroupNameWidget extends StatelessWidget {
   const _GroupNameWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final model = GroupFormWidgetModelProvider.read(context)?.model;
+    final model = GroupFormWidgetModelProvider.watch(context)?.model;
     return TextField(
       textCapitalization: TextCapitalization.words,
       autofocus: true,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText:'Введите имя гупппы',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: 'Имя гупппы',
+        errorText: model?.errorText,
       ),
       onChanged: (value) => model?.groupName = value,
-      onEditingComplete:() => model?.saveGroup(context),
+      onEditingComplete: () => model?.saveGroup(context),
     );
   }
 }
