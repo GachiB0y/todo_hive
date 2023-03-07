@@ -65,13 +65,19 @@ class _TaskListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final taskCount =
         TasksWidgetModelProvider.watch(context)?.model.tasks.length ?? 0;
-    return ListView.separated(
+    return ListView.builder(
       itemCount: taskCount,
-      separatorBuilder: (BuildContext context, int index) {
-        return const Divider(height: 1);
-      },
+      // separatorBuilder: (BuildContext context, int index) {
+      //   return const Divider(height: 1);
+      // },
       itemBuilder: (BuildContext context, int index) {
-        return _TaskListRowWidget(indexList: index);
+        return Container(
+            margin: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+            ),
+            child: _TaskListRowWidget(indexList: index)
+        );
       },
     );
   }

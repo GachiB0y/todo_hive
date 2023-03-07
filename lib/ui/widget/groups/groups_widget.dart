@@ -66,7 +66,6 @@ class _GropListWidget extends StatelessWidget {
             margin: const EdgeInsets.all(3),
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.black),
-
             ),
 
             child: _GropListRowWidget(indexList: index)
