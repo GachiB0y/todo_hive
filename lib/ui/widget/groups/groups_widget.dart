@@ -34,6 +34,7 @@ class _GroupWidgetBody extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Группы'),
+        centerTitle: true,
       ),
       body: const _GropListWidget(),
       floatingActionButton: FloatingActionButton(
@@ -52,13 +53,24 @@ class _GropListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final groupCount =
         GroupsWidgetModelProvider.watch(context)?.model.groups.length ?? 0;
-    return ListView.separated(
+    return ListView.builder(
       itemCount: groupCount,
-      separatorBuilder: (BuildContext context, int index) {
-        return const Divider(height: 1);
-      },
+      // separatorBuilder: (BuildContext context, int index) {
+      //   return const Divider(
+      //     height: 1,
+      //     color: Colors.black,
+      //   );
+      // },
       itemBuilder: (BuildContext context, int index) {
-        return _GropListRowWidget(indexList: index);
+        return Container(
+            margin: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+
+            ),
+
+            child: _GropListRowWidget(indexList: index)
+        );
       },
     );
   }
